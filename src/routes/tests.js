@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/questions', async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, order_no, dimension, story_text, option_a_text, option_b_text
+      `SELECT id, order_no, dimension, title, story_text, option_a_text, option_b_text
        FROM questions
        ORDER BY order_no`
     );

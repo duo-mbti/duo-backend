@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS questions (
   id SERIAL PRIMARY KEY,
   order_no INTEGER NOT NULL UNIQUE,
   dimension VARCHAR(2) NOT NULL CHECK (dimension IN ('EI', 'SN', 'FT', 'PJ')),
+  title VARCHAR(50) NOT NULL,
   story_text TEXT NOT NULL,
   option_a_text TEXT NOT NULL,
   option_a_trait CHAR(1) NOT NULL CHECK (option_a_trait IN ('E','I','S','N','F','T','P','J')),
