@@ -57,4 +57,31 @@ router.post('/submit', async (req, res) => {
   }
 });
 
+// GET /tests/result/:mbti - MBTI 유형별 결과 페이지 콘텐츠 조회
+router.get('/result/:mbti', async (req, res) => {
+  const mbti = req.params.mbti.toUpperCase();
+
+  if (!/^[EI][SN][FT][PJ]$/.test(mbti)) {
+    return res.status(400).json({ error: '유효하지 않은 MBTI 유형입니다.' });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT type, title, description, image_url
+       FROM mbti_types
+       WHERE type = $1`,
+      [mbti]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: '해당 유형의 콘텐츠를 찾을 수 없습니다.' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: '결과를 불러오지 못했습니다.' });
+  }
+});
+
 module.exports = router;
