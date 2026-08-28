@@ -67,7 +67,7 @@ router.get('/result/:mbti', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT type, title, description, image_url
+      `SELECT type, title, epithet, symbol, description, long_description, keywords, image_url
        FROM mbti_types
        WHERE type = $1`,
       [mbti]
