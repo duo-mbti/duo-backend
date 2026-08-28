@@ -12,3 +12,11 @@ CREATE TABLE IF NOT EXISTS questions (
   CHECK (POSITION(option_a_trait IN dimension) > 0),
   CHECK (POSITION(option_b_trait IN dimension) > 0)
 );
+
+-- MBTI 16유형 결과 페이지 콘텐츠 (신화 테마)
+CREATE TABLE IF NOT EXISTS mbti_types (
+  type CHAR(4) PRIMARY KEY CHECK (type ~ '^[EI][SN][FT][PJ]$'),
+  title VARCHAR(100) NOT NULL,
+  description TEXT NOT NULL,
+  image_url TEXT
+);
