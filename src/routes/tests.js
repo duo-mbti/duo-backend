@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/questions', async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, order_no, dimension, story_text, option_a_text, option_b_text
+      `SELECT id, order_no, dimension, title, story_text, option_a_text, option_b_text
        FROM questions
        ORDER BY order_no`
     );
@@ -67,7 +67,7 @@ router.get('/result/:mbti', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT type, title, description, image_url
+      `SELECT type, title, epithet, symbol, description, long_description, keywords, image_url
        FROM mbti_types
        WHERE type = $1`,
       [mbti]
